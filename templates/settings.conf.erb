@@ -46,7 +46,7 @@ check_space = True
 nfo_name = <filename>.orig.<ext>
 from = <%= scope.lookup_hiera('[::couchpotato::renamer::from']) %>
 foldersep = 
-to = <%= scope.lookup_hiera('[::couchpotato::renamer::to'])  %>
+to = <%= scope.lookup_hiera(['::couchpotato::renamer::to'])  %>
 cleanup = 1
 unrar_modify_date = False
 move_leftover = False
