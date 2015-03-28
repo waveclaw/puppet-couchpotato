@@ -1,0 +1,38 @@
+---
+couchpotato::notifiers:
+  'plex':
+     username: 'foo'
+     on_snatch: 0
+     auth_token: 'backlava'
+     clients:
+     enabled: 1
+     media_server: '1.2.3.4'
+     password: 'password'
+couchpotato::user: 'couchpotato'
+couchpotato::home: '/usr/lib/couchpotato'
+couchpotato::data: '/var/lib/couchpotato'
+couchpotato::pidfile: '/var/run/couchpotato.pid'
+couchpotato::core::api: 'cheese'
+couchpotato::core::user: 'foo'
+couchpotato::core::password: '1234'
+couchpotato::core::data: '/var/lib/couchpotato'
+couchpotato::manage::library: '/var/lib/Movies/'
+couchpotato::renamer::from: '/var/lib/Downloads/complete/'
+couchpotato::renamer::to: '/var/lib/Movies/New Movies/'
+couchpotato::searchers:
+  'blackhole':
+     directory: '/var/lib/Downloads/nzb/'
+     manual: 0
+     enabled: 0
+     create_subdir: 0
+     use_for: 'both'
+  'sabnzbd':
+     category: 'movies'
+     delete_failed: True
+     manual: False
+     enabled: 1
+     priority: 0
+     ssl: 0
+     host: 'localhost:8080'
+     remove_complete: False
+     api_key: '1234'
