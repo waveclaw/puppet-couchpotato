@@ -1,15 +1,15 @@
 [core]
-api_key = <%= scope.lookup_hiera(['::couchpotato::core::api']) %>
-username = <%= scope.lookup_hiera(['::couchpotato::core::user']) %>
+api_key = <%= scope.function_hiera(['couchpotato::core::api']) %>
+username = <%= scope.function_hiera(['couchpotato::core::user']) %>
 ssl_key = 
 ssl_cert = 
-data_dir = <%= scope.lookup_hiera(['::couchpotato::core::data']) %>
+data_dir = <%= scope.function_hiera(['couchpotato::core::data']) %>
 permission_folder = 0755
 development = 0
 url_base = 
 debug = 0
 launch_browser = 1
-password = <%= scope.lookup_hiera(['::couchpotato::core::password']) %>
+password = <%= scope.function_hiera(['couchpotato::core::password']) %>
 port = 5050
 permission_file = 0644
 show_wizard = 0
@@ -35,7 +35,7 @@ startup_scan = True
 library_refresh_interval = 0
 cleanup = True
 enabled = 1
-library = <%= scope.lookup_hiera('[::couchpotato::manage::library']) %>
+library = <%= scope.function_hiera(['couchpotato::manage::library']) %>
 
 [renamer]
 file_name = <thename><cd>.<ext>
@@ -44,9 +44,9 @@ default_file_action = move
 ntfs_permission = False
 check_space = True
 nfo_name = <filename>.orig.<ext>
-from = <%= scope.lookup_hiera('[::couchpotato::renamer::from']) %>
+from = <%= scope.function_hiera(['couchpotato::renamer::from']) %>
 foldersep = 
-to = <%= scope.lookup_hiera(['::couchpotato::renamer::to'])  %>
+to = <%= scope.function_hiera(['couchpotato::renamer::to'])  %>
 cleanup = 1
 unrar_modify_date = False
 move_leftover = False

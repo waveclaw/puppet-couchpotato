@@ -10,27 +10,20 @@ class couchpotato::defaults {
   $packages = 'couchpotato'
   $services = 'couchpotato'
   $iniconf  = { 'file' => 'settings.conf', 
-    'path' => '/var/lib/couchpotato/',
+    'path' => '/var/lib/couchpotato',
     'template' => 'couchpotato/settings.conf.erb' }
   $sysconf = { 'file' => 'couchpotato', 
+     'path' => '/etc/sysconfig'
     'template' => 'couchpotato/couchpotato.erb' }
   case $::osfamily {
-    'Debian': {
-      $repos    = 'ppa:jcfp/ppa'
-      $sysconf['path'] = '/etc/defaults'
-    }
     'RedHat': {
-      $repos    = [ 'http://nuxref.com/repo/', ]
-      $sysconf['path'] = '/etc/sysconfig'
+      $repos    = [ 'http://nuxref.com/repo', ]
     }
     'Suse': {
       $repos    = [
         join([ 'http://download.opensuse.org/repositories',
-          'Archiving/SLE_12'],'/'),
-        join([ 'http://download.opensuse.org/repositories',
           'home:/waveclaw:/HTPC/SLE_12'],'/')
       ]
-      $sysconf['path'] = '/etc/sysconfig'
     }
     default: {
       fail("${::operatingsystem} not supported")
