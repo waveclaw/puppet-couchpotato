@@ -35,7 +35,7 @@ startup_scan = True
 library_refresh_interval = 0
 cleanup = True
 enabled = 1
-library = <% = scope.lookup_hiera('[::couchpotato::manage::library']) %>
+library = <%= scope.lookup_hiera('[::couchpotato::manage::library']) %>
 
 [renamer]
 file_name = <thename><cd>.<ext>
