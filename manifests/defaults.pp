@@ -9,10 +9,10 @@ class couchpotato::defaults {
   $group    = 'couchpotato'
   $packages = 'couchpotato'
   $services = 'couchpotato'
-  $iniconf  = { 'file' => 'settings.conf', 
+  $iniconf  = { 'file' => 'settings.conf',
     'path' => '/var/lib/couchpotato',
     'template' => 'couchpotato/settings.conf.erb' }
-  $sysconf = { 'file' => 'couchpotato', 
+  $sysconf = { 'file' => 'couchpotato',
     'path' => '/etc/sysconfig',
     'template' => 'couchpotato/couchpotato.erb' }
   case $::osfamily {
