@@ -5,12 +5,18 @@
 # (The actual sabndbz.ini file is in the profile::mediaserver module)
 #
 class couchpotato::config (
-  $sysconf = hiera('couchpotato::config::sysconf', $::couchpotato::defaults::sysconf),
-  $iniconf = hiera('couchpotato::config::iniconf', $::couchpotato::defaults::iniconf),
-  $home    = hiera('couchpotato::config::home', $::couchpotato::defaults::home),
-  $user    = hiera('couchpotato::config::user', $::couchpotato::defaults::user),
-  $group   = hiera('couchpotato::config::group', $::couchpotato::defaults::group),
-  $apikey  = hiera('couchpotato::config::apikey', $::couchpotato::defaults::apikey),
+  $sysconf = hiera('couchpotato::config::sysconf',
+    $::couchpotato::defaults::sysconf),
+  $iniconf = hiera('couchpotato::config::iniconf',
+    $::couchpotato::defaults::iniconf),
+  $home    = hiera('couchpotato::config::home',
+    $::couchpotato::defaults::home),
+  $user    = hiera('couchpotato::config::user',
+    $::couchpotato::defaults::user),
+  $group   = hiera('couchpotato::config::group',
+    $::couchpotato::defaults::group),
+  $apikey  = hiera('couchpotato::config::apikey',
+    $::couchpotato::defaults::apikey),
 ) inherits couchpotato::defaults {
   validate_hash($sysconf)
   validate_hash($iniconf)
@@ -36,26 +42,29 @@ class couchpotato::config (
   # what about $home/couchpotato.ini ?
   $pathname = $iniconf['path']
   file { $pathname:
-    ensure => directory,
-    owner  => $user,
-    group  => $group,
-    mode   => '0750',
+    ensure    => directory,
+    owner     => $user,
+    group     => $group,
+    mode      => '0750',
+    show_diff => false,
   }
   $basename = $iniconf['file']
   $inifile = "${pathname}/${basename}"
   if has_key($iniconf, 'source') {
     file { $inifile:
-      source => $iniconf['source'],
-      owner  => $user,
-      group  => $group,
-      mode   => '0600',
+      source    => $iniconf['source'],
+      owner     => $user,
+      group     => $group,
+      mode      => '0600',
+      show_diff => false,
     }
   } elsif has_key($iniconf, 'template') {
     file { $inifile:
-      content => template($iniconf['template']),
-      owner   => $user,
-      group   => $group,
-      mode    => '0600',
+      content   => template($iniconf['template']),
+      owner     => $user,
+      group     => $group,
+      mode      => '0600',
+      show_diff => false,
     }
   } else {
     notice('No source for configuration file, none will be used.')
