@@ -28,6 +28,7 @@ class couchpotato::config (
   $note_pr = hiera('couchpotato::notifiers', {}),
   $newznab = hiera('couchpotato::newznab::api_key', undef),
   $moviedb = hiera('couchpotato::themoviedb::api_key', undef),
+  $cp_home = hiera('couchpotato::home', '/usr/lib/couchpotato'),
 ) inherits couchpotato::defaults {
   validate_hash($sysconf)
   validate_hash($iniconf)
