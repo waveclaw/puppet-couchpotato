@@ -13,5 +13,8 @@ class couchpotato::service (
     enable     => true,
     hasstatus  => true,
     hasrestart => true,
+    start      => '/usr/sbin/couchpotato start',
+    stop       => '/usr/sbin/couchpotato stop',
+    status     => '/user/sbin/couchpotato status',
   }
 }
