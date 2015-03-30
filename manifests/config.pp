@@ -36,9 +36,9 @@ class couchpotato::config (
   validate_string($group)
   validate_string($apikey)
   File {
-    owner  => $user,
-    group  => $group,
-    mode   => '0640',
+    owner  => root,
+    group  => root,
+    mode   => '0644',
   }
   $confpath = $sysconf['path']
   $confname = $sysconf['file']
