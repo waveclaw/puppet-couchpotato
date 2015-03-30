@@ -1,15 +1,15 @@
 [core]
-api_key = <%= scope.function_hiera(['couchpotato::core::api']) %>
-username = <%= scope.function_hiera(['couchpotato::core::user']) %>
+api_key = <%= scope.lookupvar('::couchpotato::config::apikey') %>
+username = <%= scope.lookupvar('::couchpotato::config::user') %>
 ssl_key = 
 ssl_cert = 
-data_dir = <%= scope.function_hiera(['couchpotato::core::data']) %>
+data_dir = <%= scope.lookupvar('couchpotato::config::data') %>
 permission_folder = 0755
 development = 0
 url_base = 
 debug = 0
 launch_browser = 1
-password = <%= scope.function_hiera(['couchpotato::core::password']) %>
+password = <%= scope.lookupvar('couchpotato::config::password') %>
 port = 5050
 permission_file = 0644
 show_wizard = 0
@@ -35,7 +35,7 @@ startup_scan = True
 library_refresh_interval = 0
 cleanup = True
 enabled = 1
-library = <%= scope.function_hiera(['couchpotato::manage::library']) %>
+library = <%= scope.lookupvar('::couchpotato::config::library') %>
 
 [renamer]
 file_name = <thename><cd>.<ext>
@@ -44,9 +44,9 @@ default_file_action = move
 ntfs_permission = False
 check_space = True
 nfo_name = <filename>.orig.<ext>
-from = <%= scope.function_hiera(['couchpotato::renamer::from']) %>
+from = <%= scope.lookupvar('::couchpotato::config::from') %>
 foldersep = 
-to = <%= scope.function_hiera(['couchpotato::renamer::to'])  %>
+to = <%= scope.lookupvar('::couchpotato::config::to')  %>
 cleanup = 1
 unrar_modify_date = False
 move_leftover = False
@@ -71,7 +71,7 @@ quality = 720p
 enabled = False
 name = <filename>-trailer
 
-<%- searchers = scope.function_hiera(['couchpotato::searchers']) -%>
+<%- searchers = scope.lookupvar('::couchpotato::config::servers') -%>
 <%- if searchers -%>
   <%- searchers.keys.each do |searcher| -%>
 [<%= searcher %>]
@@ -84,7 +84,7 @@ name = <filename>-trailer
 
 [notification_providers]
 
-<%- searchers = scope.function_hiera(['couchpotato::notifiers']) -%>
+<%- searchers = scope.lookupvar('::couchpotato::config::note_pr') -%>
 <%- if searchers -%>
   <%- searchers.keys.each do |searcher| -%>
 [<%= searcher %>]
@@ -107,7 +107,7 @@ extra_score = 0,0,0,0,0,
 enabled = True
 host = api.nzb.su,api.dognzb.cr,nzbs.org,https://api.nzbgeek.info,https://www.nzbfinder.ws,https://api.oznzb.com/
 custom_tag = ,,,,,
-api_key = ,,,,,07075455c5c9aeb28f6839d8a7486099
+api_key = ,,,,,<%= scope.lookupvar('::couchpotato::config::newznab') -%>
 
 [nzbclub]
 enabled = 
@@ -372,7 +372,7 @@ automation_urls_use = 1
 automation_urls = http://www.rottentomatoes.com/syndication/rss/in_theaters.xml
 
 [themoviedb]
-api_key = 9b939aee0aaafc12a65bf448e4af9543
+api_key = <%= scope.lookupvar('::couchpotato::config::moviedb') -%>
 
 [mediabrowser]
 meta_enabled = False
