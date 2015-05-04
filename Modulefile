@@ -1,12 +1,12 @@
 name          'waveclaw-couchpotato'
 version       '0.1.0'
-source        'ssh://git@stash.waveclaw.net:7999/puppet/couchpotato.git'
+source        'https://github.com/RuudBurger/CouchPotatoServer'
 author        'waveclaw'
 license       'Apache 2.0'
-summary       'Install and configure CouchPotato the Newsgroup Binary Downloads Daemon.'
+summary       'CouchPotato is a search tool and download manager for Movies.'
 description   ''
-project_page  'https://wiki.waveclaw.net/puppet/couchpotato'
+project_page  'https://github.com/waveclaw/puppet-couchpotato'
 
-dependency 'puppetlabs/stdlib', '>= 1.0.0'
+dependency 'puppetlabs/stdlib'
+dependency 'puppetlabs/apt'
 dependency 'darin/zypprepo', '>= 1.0.2'
-

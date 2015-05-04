@@ -3,18 +3,20 @@
 # This class is called from couchpotato for setup of repos.
 #
 class couchpotato::repo(
-  $repos = hiera('couchpotato::repo::repos', $::couchpotato::defaults::repos),
-) inherits couchpotato::defaults {
-  case $::osfamily {
-    'Debian': {
-      couchpotato::repo::ppa { [$repos]: }
+) {
+  $_repo = $couchpotato::repo_name
+  if $_repo != undef {
+    case $::osfamily {
+      'Debian': {
+        couchpotato::repo::ppa { $_repo: }
+      }
+      'RedHat': {
+        couchpotato::repo::yum { $_repo: }
+      }
+      'Suse': {
+        couchpotato::repo::zyp { $_repo: }
+      }
+      default: { }
     }
-    'RedHat': {
-      couchpotato::repo::yum { [$repos]: }
-    }
-    'Suse': {
-      couchpotato::repo::zyp { [$repos]: }
-    }
-    default: { }
   }
 }

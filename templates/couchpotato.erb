@@ -1,4 +1,4 @@
-CP_USER=<%= scope.lookupvar('::couchpotato::config::user') %>
-CP_HOME=<%= scope.lookupvar('::couchpotato::config::cp_home') %>
-CP_DATA=<%= scope.lookupvar('::couchpotato::config::data') %>
-CP_PIDFILE=<%= scope.lookupvar('::couchpotato::config::pidfile') %>
+CP_USER=<%= @_user %>
+CP_HOME=<%= @_home %>
+CP_DATA=<%= @_data %>
+CP_PIDFILE=<%= @_pidfile %>

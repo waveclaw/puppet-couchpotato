@@ -1,15 +1,15 @@
 [core]
-api_key = <%= scope.lookupvar('::couchpotato::config::apikey') %>
-username = <%= scope.lookupvar('::couchpotato::config::user') %>
+api_key = <%= @_apikey %>
+username = <%= @_webuser %>
+password = <%= @_webpass %>
+data_dir = <%= @_data %>
 ssl_key = 
 ssl_cert = 
-data_dir = <%= scope.lookupvar('couchpotato::config::data') %>
 permission_folder = 0755
 development = 0
 url_base = 
 debug = 0
-launch_browser = 1
-password = <%= scope.lookupvar('couchpotato::config::password') %>
+launch_browser = 0
 port = 5050
 permission_file = 0644
 show_wizard = 0
@@ -31,22 +31,22 @@ year = 2011
 ignored_genres = 
 
 [manage]
+library = <%= @_library %>
 startup_scan = True
 library_refresh_interval = 0
 cleanup = True
 enabled = 1
-library = <%= scope.lookupvar('::couchpotato::config::library') %>
 
 [renamer]
+from = <%= @_from %>
+to = <%= @_to  %>
 file_name = <thename><cd>.<ext>
 next_on_failed = True
 default_file_action = move
 ntfs_permission = False
 check_space = True
 nfo_name = <filename>.orig.<ext>
-from = <%= scope.lookupvar('::couchpotato::config::from') %>
 foldersep = 
-to = <%= scope.lookupvar('::couchpotato::config::to')  %>
 cleanup = 1
 unrar_modify_date = False
 move_leftover = False
@@ -71,7 +71,7 @@ quality = 720p
 enabled = False
 name = <filename>-trailer
 
-<%- searchers = scope.lookupvar('::couchpotato::config::servers') -%>
+<%- searchers = @_servers -%>
 <%- if searchers -%>
   <%- searchers.keys.each do |searcher| -%>
 [<%= searcher %>]
@@ -84,7 +84,20 @@ name = <filename>-trailer
 
 [notification_providers]
 
-<%- searchers = scope.lookupvar('::couchpotato::config::note_pr') -%>
+<%- provids = @_notification_providers -%>
+<%- if provids -%>
+  <%- provids.keys.each do |provid| -%>
+[<%= provid %>]
+   <%- properties = provids[provid] -%>
+   <%- properties.keys.each do |name| -%>
+     <%= name -%> = <%= properties[name] -%>
+   <%- end -%>
+  <%- end -%>
+<%- end -%>
+
+[nzb_providers]
+
+<%- searchers = @_nzb_providers -%>
 <%- if searchers -%>
   <%- searchers.keys.each do |searcher| -%>
 [<%= searcher %>]
@@ -95,197 +108,18 @@ name = <filename>-trailer
   <%- end -%>
 <%- end -%>
 
-[nzb_providers]
-
-[binsearch]
-enabled = 
-extra_score = 0
-
-[newznab]
-use = 0,0,0,0,0,1
-extra_score = 0,0,0,0,0,
-enabled = True
-host = api.nzb.su,api.dognzb.cr,nzbs.org,https://api.nzbgeek.info,https://www.nzbfinder.ws,https://api.oznzb.com/
-custom_tag = ,,,,,
-api_key = ,,,,,<%= scope.lookupvar('::couchpotato::config::newznab') -%>
-
-[nzbclub]
-enabled = 
-extra_score = 0
-
-[omgwtfnzbs]
-username = 
-api_key = 
-enabled = 
-extra_score = 20
-
 [torrent_providers]
 
-[alpharatio]
-username = 
-seed_time = 40
-extra_score = 0
-enabled = False
-scene_only = False
-password = 
-seed_ratio = 1
-
-[awesomehd]
-seed_time = 40
-extra_score = 20
-only_internal = 1
-passkey = 
-enabled = False
-favor = both
-prefer_internal = 1
-seed_ratio = 1
-
-[bithdtv]
-username = 
-seed_time = 40
-extra_score = 20
-enabled = False
-password = 
-seed_ratio = 1
-
-[bitsoup]
-username = 
-seed_time = 40
-extra_score = 20
-enabled = False
-password = 
-seed_ratio = 1
-
-[hdaccess]
-username = 
-apikey = 
-seed_time = 0
-extra_score = 0
-enabled = False
-internal_only = False
-prefer_internal = 1
-seed_ratio = 0
-
-[hdbits]
-username = 
-seed_time = 40
-extra_score = 0
-passkey = 
-enabled = False
-internal_only = False
-seed_ratio = 1
-
-[ilovetorrents]
-username = 
-seed_time = 40
-extra_score = 0
-enabled = False
-password = 
-seed_ratio = 1
-
-[iptorrents]
-username = 
-freeleech = 0
-extra_score = 0
-enabled = False
-seed_time = 40
-password = 
-seed_ratio = 1
-
-[kickasstorrents]
-domain = 
-seed_time = 40
-extra_score = 0
-enabled = True
-only_verified = False
-seed_ratio = 1
-
-[passthepopcorn]
-username = 
-domain = 
-seed_time = 40
-extra_score = 20
-passkey = 
-prefer_scene = 0
-enabled = False
-prefer_golden = 1
-require_approval = 0
-password = 
-seed_ratio = 1
-prefer_freeleech = 1
-
-[sceneaccess]
-username = 
-seed_time = 40
-extra_score = 20
-enabled = False
-password = 
-seed_ratio = 1
-
-[thepiratebay]
-seed_time = 40
-domain = 
-enabled = False
-seed_ratio = 1
-extra_score = 0
-
-[torrentbytes]
-username = 
-seed_time = 40
-extra_score = 20
-enabled = False
-password = 
-seed_ratio = 1
-
-[torrentday]
-username = 
-seed_time = 40
-extra_score = 0
-enabled = False
-password = 
-seed_ratio = 1
-
-[torrentleech]
-username = 
-seed_time = 40
-extra_score = 20
-enabled = False
-password = 
-seed_ratio = 1
-
-[torrentpotato]
-use = 
-seed_time = 40
-name = 
-extra_score = 0
-enabled = False
-host = 
-pass_key = ,
-seed_ratio = 1
-
-[torrentshack]
-username = 
-seed_time = 40
-extra_score = 0
-enabled = False
-scene_only = False
-password = 
-seed_ratio = 1
-
-[torrentz]
-verified_only = True
-extra_score = 0
-minimal_seeds = 1
-enabled = True
-seed_time = 40
-seed_ratio = 1
-
-[yify]
-seed_time = 40
-domain = 
-enabled = False
-seed_ratio = 1
-extra_score = 0
+<%- searchers = @_torrent_providers -%>
+<%- if searchers -%>
+  <%- searchers.keys.each do |searcher| -%>
+[<%= searcher %>]
+   <%- properties = searchers[searcher] -%>
+   <%- properties.keys.each do |name| -%>
+     <%= name -%> = <%= properties[name] -%>
+   <%- end -%>
+  <%- end -%>
+<%- end -%>
 
 [searcher]
 preferred_method = both
@@ -306,87 +140,13 @@ max_items = 5
 
 [automation_providers]
 
-[bluray]
-automation_enabled = False
-chart_display_enabled = True
-backlog = False
-
-[crowdai]
-automation_enabled = False
-number_grabs = 500
-automation_urls_use = 1
-automation_urls = http://YOUR_PROVIDER/rss?t=THE_MOVIE_CATEGORY&i=YOUR_USER_ID&r=YOUR_API_KEY&res=2&rls=2&num=100
-
-[flixster]
-automation_ids_use = 
-automation_enabled = False
-automation_ids = 
-
-[goodfilms]
-automation_enabled = False
-automation_username = 
-
-[imdb]
-automation_charts_top250 = False
-chart_display_boxoffice = True
-chart_display_top250 = False
-automation_enabled = False
-chart_display_rentals = True
-automation_urls_use = 
-automation_urls = 
-automation_providers_enabled = 0
-automation_charts_rentals = 0
-chart_display_theater = False
-automation_charts_theater = 0
-chart_display_enabled = True
-automation_charts_boxoffice = 0
-
-[itunes]
-automation_enabled = False
-automation_urls_use = ,
-automation_urls = https://itunes.apple.com/rss/topmovies/limit=25/xml,
-
-[kinepolis]
-automation_enabled = False
-
-[letterboxd]
-automation_enabled = False
-automation_urls_use = 
-automation_urls = 
-
-[moviemeter]
-automation_enabled = False
-
-[moviesio]
-automation_enabled = False
-automation_urls_use = 
-automation_urls = 
-
-[popularmovies]
-automation_enabled = False
-
-[rottentomatoes]
-automation_enabled = 0
-tomatometer_percent = 80
-automation_urls_use = 1
-automation_urls = http://www.rottentomatoes.com/syndication/rss/in_theaters.xml
-
-[themoviedb]
-api_key = <%= scope.lookupvar('::couchpotato::config::moviedb') -%>
-
-[mediabrowser]
-meta_enabled = False
-
-[sonyps3]
-meta_enabled = False
-
-[windowsmediacenter]
-meta_enabled = False
-
-[moviesearcher]
-cron_day = *
-cron_hour = 5
-cron_minute = 24
-always_search = False
-run_on_launch = 0
-search_on_add = 1
+<%- automats = @_automation_providers -%>
+<%- if automats -%>
+  <%- automats.keys.each do |automat| -%>
+[<%= automat %>]
+   <%- properties = automats[automat] -%>
+   <%- properties.keys.each do |name| -%>
+     <%= name -%> = <%= properties[name] -%>
+   <%- end -%>
+  <%- end -%>
+<%- end -%>
