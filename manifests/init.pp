@@ -48,6 +48,7 @@ class couchpotato (
   $webuser             = $::couchpotato::defaults::webuser,
   $webpass             = $::couchpotato::defaults::webpass,
   $library             = $::couchpotato::defaults::library_path,
+  $home_path           = $::couchpotato::defaults::home_path,
   $target_path         = $::couchpotato::defaults::target_path,
   $source_path         = $::couchpotato::defaults::source_path,
   $servers             = $::couchpotato::defaults::servers,
@@ -60,25 +61,26 @@ class couchpotato (
   validate_string($user_name)
   validate_string($user_home)
   validate_string($group_name)
-  #$repo_name
-  #$package_name
-  #$service_name
-  validate_absolute_path($config_file_path)
-  validate_absolute_path($sysconfig_file_path)
   validate_string($sysconfig_file_name)
-  validate_absolute_path($data_path)
-  validate_hash($servers)
   validate_string($apikey)
   validate_string($webuser)
   validate_string($webpass)
+  validate_absolute_path($data_path)
+  validate_absolute_path($config_file_path)
+  validate_absolute_path($sysconfig_file_path)
   validate_absolute_path($library)
   validate_absolute_path($target_path)
   validate_absolute_path($source_path)
+  validate_absolute_path($home_path)
+  validate_absolute_path($pidfile)
   validate_hash($nzb)
   validate_hash($torrent)
   validate_hash($automation)
   validate_hash($notification)
-  validate_absolute_path($pidfile)
+  validate_hash($servers)
+  #$repo_name
+  #$service_name
+  #$package_name
 
   class { '::couchpotato::users': } ->
   class { '::couchpotato::repo': } ->

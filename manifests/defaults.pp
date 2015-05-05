@@ -10,6 +10,7 @@ class couchpotato::defaults {
   $package_name        = 'couchpotato'
   $service_name        = 'couchpotato'
   $config_file_path    = '/var/lib/couchpotato'
+  $home_path           = '/usr/lib/couchpotato'
   $sysconfig_file_name = 'couchpotato'
   $data_path           = $config_file_path
   $pidfile             = '/var/run/couchpotato.pid'

@@ -18,7 +18,7 @@ class couchpotato::sysconfig(
   $_sysconfig_file = "${_file_path}/${_file_name}"
 
   $_user           = $couchpotato::user_name
-  $_home           = $couchpotato::config_file_path
+  $_home           = $couchpotato::config_home_path
   $_data           = $couchpotato::data_path
   $_group          = $couchpotato::group_name
   $_pidfile        = $couchpotato::pidfile
