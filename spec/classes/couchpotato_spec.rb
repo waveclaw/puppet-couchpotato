@@ -35,19 +35,16 @@ describe 'couchpotato' do
         it { is_expected.to contain_service('couchpotato') }
         it { is_expected.to contain_package('couchpotato').with_ensure('present') }
         if osfamily == 'RedHat'
-          it { is_expected.to contain_file('/etc/sysconfig') }
           it { is_expected.to contain_file('/etc/sysconfig/couchpotato') }
           it { is_expected.to contain_yumrepo('http__nuxref.com_repo') }
           it { is_expected.to contain_couchpotato__repo__yum('http://nuxref.com/repo') }
         end
         if osfamily == 'Suse'
-          it { is_expected.to contain_file('/etc/sysconfig') }
           it { is_expected.to contain_file('/etc/sysconfig/couchpotato') }
           it { is_expected.to contain_couchpotato__repo__zyp('http://download.opensuse.org/repositories/home:/waveclaw:/HTPC/SLE_12') }
           it { is_expected.to contain_zypprepo('http__download.opensuse.org_repositories_home_waveclaw_HTPC_SLE_12') }
         end
         if osfamily == 'Debian'
-          it { is_expected.to contain_file('/etc/defaults') }
           it { is_expected.to contain_file('/etc/defaults/couchpotato') }
         end
       end
@@ -100,7 +97,6 @@ describe 'couchpotato' do
           it { is_expected.to contain_file('/bar/data') }
           it { is_expected.to contain_file('/bar') }
           it { is_expected.to contain_file('/camera/couchpotato') }
-          it { is_expected.to contain_file('/camera') }
           it { is_expected.to contain_file('/foo') }
           it { is_expected.to contain_group('couch') }
           it { is_expected.to contain_package('tater') }
