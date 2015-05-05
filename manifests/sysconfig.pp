@@ -28,12 +28,6 @@ class couchpotato::sysconfig(
     group  => $_group,
     mode   => '0750',
   }
-  ensure_resource('file', $_file_path, {
-    'ensure' => 'directory',
-    'owner'  => $_user,
-    'group'  => $_group,
-    'mode'   => '0750',
-  })
   if $source != undef {
     file { $_sysconfig_file:
       ensure => file,
