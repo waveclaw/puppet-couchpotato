@@ -5,7 +5,7 @@
 #
 class couchpotato::defaults {
   $user_name           = 'couchpotato'
-  $user_home           = '/uar/lib/couchpotato'
+  $user_home           = '/usr/lib/couchpotato'
   $group_name          = 'couchpotato'
   $package_name        = 'couchpotato'
   $service_name        = 'couchpotato'
