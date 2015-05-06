@@ -31,7 +31,7 @@ Uses significant I/O and disk space to process downloaded Usenet binaries.
 
 Opens selected ports on the system firewall.
 
-### Setup Requirements **OPTIONAL**
+### Setup Requirements
 
 This module pulls in many packages that may require custom repositories.
 
@@ -60,7 +60,7 @@ Compatible with RedHat and Suse type Linux Operating Systems.
 
 ## Development
 
-See [Waveclaw.net Software Repository](https://stash.waveclaw.net/projects/PUPPET/repos/couchpotato)
+Apache 2.0 Licensed.  Forks welcome.  Push requests more welcome.
 
 ## Release Notes/Contributors/Etc
 
